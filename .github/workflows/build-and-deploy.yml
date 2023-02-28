@@ -7,7 +7,7 @@ permissions:
   contents: write
 jobs:
   build-and-deploy:
-    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -19,9 +19,9 @@ jobs:
       - name: Install and Build 🔧
         run: |
           yarn
-          yarn build
+          yarn build -- --base=/cfpb-uswds/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/ # The folder the action should deploy.
+          folder: dist/
